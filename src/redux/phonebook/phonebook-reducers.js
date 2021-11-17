@@ -5,8 +5,7 @@ import * as actions from './phonebook-action';
 import contactsJson from '../../contacts.json';
 
 const initialState =
-  // JSON.parse(localStorage.getItem('contacts')) ?? contactsJson;
-  contactsJson;
+  JSON.parse(localStorage.getItem('contacts')) ?? contactsJson;
 
 const addNewContact = (state, payload) => [payload, ...state];
 

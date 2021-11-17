@@ -1,5 +1,4 @@
-// import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
 import {
   persistStore,
@@ -11,52 +10,36 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-// import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
+import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
 
 import phoneBookReducer from './phonebook/phonebook-reducers';
 
 // console.log(process.env.NODE_ENV);//development OR PRODUCTION
-// const middleware = [
-//   ...getDefaultMiddleware({
-//     serializableCheck: {
-//       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-//     },
-//   }),
-//   logger,
-// ];
+const middleware = [
+  ...getDefaultMiddleware({
+    serializableCheck: {
+      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+    },
+  }),
+  logger,
+];
 
-// const persistConfig = {
-//   key: 'contacts',
-//   // storage,
-//   // blacklist: ['filter'],
-// };
-const myMiddleware = store => next => action => {
-  console.log('my middleware');
-  next(action);
+const persistConfig = {
+  key: 'contacts',
+  storage,
+  blacklist: ['filter'],
 };
 
 const store = configureStore({
   reducer: {
-    // phoneBook: persistReducer(persistConfig, phoneBookReducer),
-    phoneBook: phoneBookReducer,
+    phoneBook: persistReducer(persistConfig, phoneBookReducer),
   },
-  // middleware: middleware,
-  middleware: getDefaultMiddleware => [
-    ...getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-    }),
-    myMiddleware,
-    logger,
-  ],
-
+  middleware: middleware,
   // devTools: process.env.NODE_ENV === 'development',
 });
-// const persistor = persistStore(store);
+const persistor = persistStore(store);
 
-// export default { store, persistor };
-export default store;
+export default { store, persistor };
 
 // ====== react redux============
 
