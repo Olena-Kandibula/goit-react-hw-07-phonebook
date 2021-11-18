@@ -65,24 +65,25 @@ export const addContact = createAsyncThunk(
   },
 );
 
-// export const filterContact = createAsyncThunk(
-//     'contacts/filter',
-//     async function (value, { rejectWithValue, dispatch }) {
-//         try {
-//             const response = await fetch(`https://618eb0d750e24d0017ce13d2.mockapi.io/api/contacts?filter=${value}`, {
-//              metod:'GET',
-//             })
-//             // console.log(response)
-//          if (!response.ok) {
-//             throw new Error("Can't delete contact!Error Server!");
-//          }
-//             dispatch(deleteContact({id}));
-
-//         } catch (error) {
-//              return rejectWithValue(error.message)
-//         }
-//     }
-// );
+export const filterContact = createAsyncThunk(
+  'contacts/filter',
+  async function (value, { rejectWithValue, dispatch }) {
+    try {
+      const response = await fetch(
+        `https://618eb0d750e24d0017ce13d2.mockapi.io/api/contacts?filter=${value}`,
+        {
+          metod: 'GET',
+        },
+      );
+      if (!response.ok) {
+        throw new Error("Can't filtered contact!Error Server!");
+      }
+      dispatch(changeFilter(value));
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  },
+);
 
 const setError = (state, action) => {
   state.status = 'rejected';
@@ -193,6 +194,5 @@ const contactSlice = createSlice({
   // }
 });
 
-export const { addContactNew, deleteContact, changeFilter } =
-  contactSlice.actions;
+const { addContactNew, deleteContact, changeFilter } = contactSlice.actions;
 export default contactSlice.reducer;
