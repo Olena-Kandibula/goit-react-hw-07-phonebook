@@ -140,58 +140,6 @@ const contactSlice = createSlice({
     },
     [removeContact.rejected]: setError,
   },
-
-  // extraReducers: (builder) => {
-  //   builder
-  //     .addCase(fetchContacts.pending, (state, action) => {
-  //     state.status = 'loading';
-  //     state.error = null;
-  //     })
-  //   .addCase(fetchContacts.fulfilled, (state, action) => {
-  //      state.status = 'resolved';
-  //     console.log('super fetchContacts action.payload', action.payload)
-  //     console.log('super fetchContacts state.contacts', state.contacts)
-  //     // state.contacts.push(action.payload);
-  //     state.contacts = action.payload;
-  //     console.log('super fetchContacts state.contacts - 1 ', state.contacts)
-  //     state.error = null;
-  //   })
-  //    .addCase(fetchContacts.rejected, (state,action)=>{
-  //       state.status = 'rejected';
-  // state.error = action.payload;
-  //    })
-
-  //         .addCase(addContact.pending, (state, action) => {
-  //     state.status = 'loading';
-  //     state.error = null;
-  //     })
-  //   .addCase(addContact.fulfilled, (state, action) => {
-  //      state.status = 'resolved';
-  //     console.log('super addContacts action.payload', action.payload)
-  //     console.log('super dddContacts state.contacts', state.contacts)
-  //     // state.contacts = action.payload;
-  //      state.contacts.push(action.payload);
-  //     console.log('super fetchContacts state.contacts - 1 ', state.contacts)
-  //     state.error = null;
-  //   })
-  //    .addCase(addContact.rejected, (state,action)=>{
-  //       state.status = 'rejected';
-  // state.error = action.payload;
-  //    })
-
-  //     .addCase(removeContact.pending, (state, action) => {
-  //     state.status = 'loading';
-  //     state.error = null;
-  //     })
-  //   .addCase(removeContact.fulfilled, (state, action) => {
-  //     state.status = 'resolved';
-  //       state.error = null;
-  //   })
-  //    .addCase(removeContact.rejected, (state,action)=>{
-  //       state.status = 'rejected';
-  // state.error = action.payload;
-  //    })
-  // }
 });
 
 const { addContactNew, deleteContact, changeFilter } = contactSlice.actions;
