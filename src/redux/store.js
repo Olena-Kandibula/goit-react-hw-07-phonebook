@@ -1,45 +1,47 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import logger from 'redux-logger';
-import {
-  persistStore,
-  persistReducer,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-} from 'redux-persist';
-import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
+// import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+// import logger from 'redux-logger';
+// import {
+//   persistStore,
+//   persistReducer,
+//   FLUSH,
+//   REHYDRATE,
+//   PAUSE,
+//   PERSIST,
+//   PURGE,
+//   REGISTER,
+// } from 'redux-persist';
+// import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
 
-import phoneBookReducer from './phonebook/phonebook-reducers';
+// import phoneBookReducer from './phonebook/phonebook-reducers';
 
-// console.log(process.env.NODE_ENV);//development OR PRODUCTION
-const middleware = [
-  ...getDefaultMiddleware({
-    serializableCheck: {
-      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-    },
-  }),
-  logger,
-];
+// // console.log(process.env.NODE_ENV);//development OR PRODUCTION
+// const middleware = [
+//   ...getDefaultMiddleware({
+//     serializableCheck: {
+//       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+//     },
+//   }),
+//   logger,
+// ];
 
-const persistConfig = {
-  key: 'contacts',
-  storage,
-  blacklist: ['filter'],
-};
+// // const persistConfig = {
+// //   key: 'contacts',
+// //   storage,
+// //   blacklist: ['filter'],
+// // };
 
-const store = configureStore({
-  reducer: {
-    phoneBook: persistReducer(persistConfig, phoneBookReducer),
-  },
-  middleware: middleware,
-  // devTools: process.env.NODE_ENV === 'development',
-});
-const persistor = persistStore(store);
+// const store = configureStore({
+//   reducer: {
+//     phoneBook: phoneBookReducer,
+//      // phoneBook: persistReducer(persistConfig, phoneBookReducer),
+//   },
+//   middleware: middleware,
+//   // devTools: process.env.NODE_ENV === 'development',
+// });
+// // const persistor = persistStore(store);
 
-export default { store, persistor };
+// // eslint-disable-next-line import/no-anonymous-default-export
+// // export default { store};
 
 // ====== react redux============
 

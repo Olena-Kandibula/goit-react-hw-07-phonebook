@@ -1,16 +1,18 @@
-import PropTypes from 'prop-types';
+import { useState } from 'react';
 
-import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { addContact } from '../../store/contactSlice';
+
 import s from '../ContactForm/ContactForm.module.css';
 
-import { connect } from 'react-redux';
-import * as actions from '../../redux/phonebook/phonebook-action';
-
-function ContactForm({ onSubmit }) {
+function ContactForm() {
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [phone, setPhone] = useState('');
+  const contacts = useSelector(state => state.contacts.contacts);
 
-  const handleChange = e => {
+  const dispatch = useDispatch();
+
+  function handleChange(e) {
     const { name, value } = e.target;
 
     switch (name) {
@@ -18,18 +20,18 @@ function ContactForm({ onSubmit }) {
         setName(value);
         break;
 
-      case 'number':
-        setNumber(value);
+      case 'phone':
+        setPhone(value);
         break;
 
       default:
         return;
     }
-  };
+  }
 
   const reset = () => {
     setName('');
-    setNumber('');
+    setPhone('');
   };
 
   const handleSubmit = e => {
@@ -37,11 +39,18 @@ function ContactForm({ onSubmit }) {
 
     const newContact = {
       name: name,
-      number: number,
-      id: '',
+      phone: phone,
     };
 
-    onSubmit(newContact);
+    if (contacts) {
+      if (contacts.some(contact => contact.name.includes(name))) {
+        alert(`${name} is already in contacts!`);
+        reset();
+        return;
+      }
+    }
+
+    dispatch(addContact(newContact));
     reset();
   };
 
@@ -64,13 +73,13 @@ function ContactForm({ onSubmit }) {
       </label>
 
       <label className={s.label}>
-        Number:
+        Phone:
         <input
           className={s.input}
           type="tel"
-          name="number"
+          name="phone"
           autoComplete="off"
-          value={number}
+          value={phone}
           onChange={handleChange}
           placeholder="050-50-50"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -84,13 +93,4 @@ function ContactForm({ onSubmit }) {
   );
 }
 
-ContactForm.prototypes = {
-  onSubmit: PropTypes.func,
-};
-
-const mapDispatchToProps = dispatch => ({
-  onSubmit: ({ name, number }) =>
-    dispatch(actions.addContact({ name, number })),
-});
-
-export default connect(null, mapDispatchToProps)(ContactForm);
+export default ContactForm;

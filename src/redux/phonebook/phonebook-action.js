@@ -1,18 +1,18 @@
-import { createAction } from '@reduxjs/toolkit';
-import shortid from 'shortid';
+// import { createAction } from '@reduxjs/toolkit';
+// import shortid from 'shortid';
 
-const addContact = createAction('phonebook/Add', ({ name, number }) => ({
-  payload: {
-    name: name,
-    number: number,
-    id: shortid.generate(),
-  },
-}));
+// const addContact = createAction('phonebook/Add', ({ name, number }) => ({
+//   payload: {
+//     name: name,
+//     number: number,
+//     id: shortid.generate(),
+//   },
+// }));
 
-const deleteContact = createAction('phonebook/Delete');
-const changeFilter = createAction('filter/ChangeFilter');
+// const deleteContact = createAction('phonebook/Delete');
+// const changeFilter = createAction('filter/ChangeFilter');
 
-export { addContact, deleteContact, changeFilter };
+// export { addContact, deleteContact, changeFilter };
 
 // ===== react redux ============
 

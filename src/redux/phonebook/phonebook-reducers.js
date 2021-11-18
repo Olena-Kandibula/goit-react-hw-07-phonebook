@@ -1,33 +1,33 @@
-import { combineReducers } from 'redux';
-import { createReducer } from '@reduxjs/toolkit';
+// import { combineReducers } from 'redux';
+// import { createReducer } from '@reduxjs/toolkit';
 
-import * as actions from './phonebook-action';
-import contactsJson from '../../contacts.json';
+// import * as actions from './phonebook-action';
+// import contactsJson from '../../contacts.json';
 
-const initialState =
-  JSON.parse(localStorage.getItem('contacts')) ?? contactsJson;
+// const initialState =
+//   JSON.parse(localStorage.getItem('contacts')) ?? contactsJson;
 
-const addNewContact = (state, payload) => [payload, ...state];
+// const addNewContact = (state, payload) => [payload, ...state];
 
-const deleteContact = (state, payload) =>
-  state.filter(({ id }) => id !== payload);
+// const deleteContact = (state, payload) =>
+//   state.filter(({ id }) => id !== payload);
 
-const contactsReducer = createReducer(initialState, {
-  [actions.addContact]: (state, { payload }) => addNewContact(state, payload),
-  [actions.deleteContact]: (state, { payload }) =>
-    deleteContact(state, payload),
-});
+// const contactsReducer = createReducer(initialState, {
+//   [actions.addContact]: (state, { payload }) => addNewContact(state, payload),
+//   [actions.deleteContact]: (state, { payload }) =>
+//     deleteContact(state, payload),
+// });
 
-const filterReducer = createReducer('', {
-  [actions.changeFilter]: (_, { payload }) => payload,
-});
+// const filterReducer = createReducer('', {
+//   [actions.changeFilter]: (_, { payload }) => payload,
+// });
 
-const phoneBookReducer = combineReducers({
-  contacts: contactsReducer,
-  filter: filterReducer,
-});
+// const phoneBookReducer = combineReducers({
+//   contacts: contactsReducer,
+//   filter: filterReducer,
+// });
 
-export default phoneBookReducer;
+// export default phoneBookReducer;
 
 // ===== react redux ============
 

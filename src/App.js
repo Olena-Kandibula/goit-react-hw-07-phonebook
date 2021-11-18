@@ -11,7 +11,7 @@ function App() {
       <h1>Phonebook</h1>
 
       <Container>
-        <ContactForm></ContactForm>
+        <ContactForm />
       </Container>
 
       <Container title="Contacts">
